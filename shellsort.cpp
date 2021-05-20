@@ -23,6 +23,10 @@ void shellSort(vector<int>& v) {
     }                                                        // Finish shell sort for all nos. in the Knuth Sequence
 }
 
+// Note - The back to back swapping of a small element towards the end covers the sorting of an entire subarray
+// This happens only when a small element is found in the end, otherwise there is no need to identify and check subarrays
+// i = K logic might make it seem that subarrays are getting missed but they are covered when there's a small element
+
 int main() {
     // vector<int> v = {1, 1, 1, 1, 2, 2, 2, 2};
     vector<int> v = {17, 21, 29, 35, 4, 9, 25, 32};
