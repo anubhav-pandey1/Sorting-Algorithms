@@ -26,6 +26,10 @@ void shellSort(vector<int>& v) {
 // Note - The back to back swapping of a small element towards the end covers the sorting of an entire subarray
 // This happens only when a small element is found in the end, otherwise there is no need to identify and check subarrays
 // i = K logic might make it seem that subarrays are getting missed but they are covered when there's a small element
+// The subarrays are covered from the back to the front, ie the initial subarrays are incomplete and the ending subarrays tend to be complete
+// An incomplete subarray for a gap K contains less than the max possible no. of elements for that value of K
+// Eg: For K = 2 and n = 9, the max size of subarray would be 4. But for i = 2, j = i, the subarray only contains two indices - j and j-K
+// Towards the end, ie for i = 8, the subarray might contain all 4 elements ie 8, 8-2, 8-2-2, 8-2-2-2 (j, j-K, j-2K, j-3K)
 
 int main() {
     // vector<int> v = {1, 1, 1, 1, 2, 2, 2, 2};
