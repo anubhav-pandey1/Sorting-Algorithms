@@ -27,6 +27,8 @@ void countingSort(vector<int>& v, int place) {             // Counting sort is u
 }                                                          // solved by using occurences to find final index of the no. in the output array
                                                            // Counting Sort is stable so duplicate digits are also managed as they have same
                                                            // order of position as in the original array so they can be distinguished
+                                                           // The prefix sum along with starting from the last provides stability as well as
+                                                           // solves the linkage problem by maintaining order and indices
 
 void radixSortLS(vector<int>& v) {                         // Radix Sort implemented with least significant digit
     int max = *max_element(v.begin(), v.end());            // Finding the max element in the vector for the max no. of digits
