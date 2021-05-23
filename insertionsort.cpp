@@ -2,12 +2,12 @@
 #include <vector>
 using namespace std;
 
-void insertionSort(vector<int>& v) {
+void insertionSort(vector<int>& v) {                 // Using swaps to insert smallest element at the correct position
     for (int i = 1; i < v.size(); i++) {             // Iterate over N - 1 elements since first is already sorted
         int j = i;                                   // Go backwards starting from the current index i using j iterator
-        while (v[j-1] > v[j] && j > 0) {             // While the previous elem is larger than the current elem
+        while (v[j-1] > v[j] && j > 0) {             // While the previous elem is larger than the current elem..
             iter_swap(v.begin()+j, v.begin()+j-1);   // Keep swapping the previous elem with the current elem
-            j--;                                     // Reduce j by 1 to go back 1 index
+            j--;                                     // Reduce j by 1 to go back 1 index and check again for the previous pair
         }                                            // Finish the required swaps for one particular elem (i) in the array
     }
 }                                                    // Using binary search instead of linear search to find the correct place
