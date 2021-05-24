@@ -9,27 +9,26 @@ int knuthSeq(int num) {                                     // Function to retur
     return h;
 }
 
-void shellSort(vector<int>& v) {
-    int K = knuthSeq(v.size() - 1);                          // K is the current gap. For K = 1, it is the insertion sort
+void shellSort(vector<int>& v) {                             // Makes passes from right to left, sorting spare subarrays with gap = K
+    int K = knuthSeq(v.size() - 1);                          // K is the current gap. For K = 1, it is the same as insertion sort
     while (K > 0) {                                          // Gap must be positive - this loop iterates over Knuth Sequence
-        for (int i = K; i < v.size(); i++) {                 // Start iterating from the index equal to gap and go forwards
+        for (int i = K; i < v.size(); i++) {                 // Start outer iteration from the index equal to gap and go forwards
                 int j = i;                                   // Start the inner loop from the first index (i) and go backwards
-                while (v[j-K] > v[j] && j > K-1) {           // While the current elem is smaller than the elem K units behind
-                    iter_swap(v.begin()+j, v.begin()+j-K);   // Swap the two elems which are at a distance of K units
-                    j -= K;                                  // Reduce j-index by K units so that we can now check the prev elem
-                }                                            // Finish the required swaps for one sparse subarray (K unit gap)
-            }                                                // Finish the required swaps for all subarrays with K-unit gap
-        K = (K-1)/3;                                         // Reduce K to become the prev. no. in Knuth Sequence
+                while (v[j-K] > v[j] && j > K-1) {           // While the current elem is smaller than the elem K units behind (pair)
+                    iter_swap(v.begin()+j, v.begin()+j-K);   // Swap the two elems which are at a distance of K units, sorting them
+                    j -= K;                                  // Reduce j-index by K units so that we can now check the prev. pair
+                }                                            // Finish the required swaps for one sparse subarray with K unit gap
+            }                                                // Finish the required swaps for all sparse subarrays with K-unit gap
+        K = (K-1)/3;                                         // Reduce K to become the prev. no. in Knuth Sequence and sort subarrays
     }                                                        // Finish shell sort for all nos. in the Knuth Sequence
 }
 
 // Note - The back to back swapping of a small element towards the end covers the sorting of an entire subarray
 // This happens only when a small element is found in the end, otherwise there is no need to identify and check subarrays
-// i = K logic might make it seem that subarrays are getting missed but they are covered when there's a small element
-// The subarrays are covered from the back to the front, ie the initial subarrays are incomplete and the ending subarrays tend to be complete
-// An incomplete subarray for a gap K contains less than the max possible no. of elements for that value of K
-// Eg: For K = 2 and n = 9, the max size of subarray would be 4. But for i = 2, j = i, the subarray only contains two indices - j and j-K
-// Towards the end, ie for i = 8, the subarray might contain all 4 elements ie 8, 8-2, 8-2-2, 8-2-2-2 (j, j-K, j-2K, j-3K)
+// Since we are starting from j = i = K and going backwards, the first few subarrays will have fewer elements than max
+// As j approaches (len - K), the sorting passes will start covering entire subarrays instead of doing it at the start
+// You can imagine the shell sort to be taking place from the right end covering all the subarrays in such a way that
+// when it approaches the left end, the subarrays have fewer elements than the larger subarrays created in the right
 
 int main() {
     // vector<int> v = {1, 1, 1, 1, 2, 2, 2, 2};
