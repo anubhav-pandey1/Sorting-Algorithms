@@ -19,3 +19,7 @@ Implementation of the most popular sorting algorithms for unsigned integers in C
 3. Signed integer sorting algorithms
 4. Float (real numbers/rational numbers) sorting algorithms
 5. Object sorting algorithms
+6. Quick Select algorithm
+7. DNF Sorting
+8. Wave Sort
+9. Radix Sort using vector of pairs to solve digits-to-index linkage problem
